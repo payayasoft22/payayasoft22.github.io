@@ -1,708 +1,932 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dan Ysrael Aguila Portfolio</title>
-  
-  <style>
-    /* Global Reset */
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        /* Assuming a font like 'Poppins' is available or will be linked */
-        font-family: Arial, sans-serif; /* Fallback to Arial */
-    }
-
-    body {
-        background: #f8f9fb;
-        color: #222;
-        line-height: 1.6;
-    }
-
-    /* NAVBAR STYLES - Merged from both original CSS blocks */
-
-    .navbar {
-        width: 100%;
-        padding: 18px 50px;
-        background: #ffffff;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        position: fixed;
-        top: 0;
-        left: 0;
-        z-index: 10;
-        box-shadow: 0 2px 12px rgba(0,0,0,0.07);
-    }
-
-    .nav-logo {
-        font-size: 22px;
-        font-weight: 600;
-    }
-
-    .nav-links {
-        display: flex;
-        list-style: none;
-        gap: 25px;
-        margin: 0;
-        padding: 0;
-    }
-
-    .nav-links li a {
-        color: #333;
-        text-decoration: none;
-        font-weight: 500;
-        transition: 0.3s;
-    }
-
-    .nav-links a:hover {
-        color: #007bff;
-    }
-
-    /* Hamburger button */
-    .burger {
-        display: none;
-        cursor: pointer;
-        flex-direction: column;
-        gap: 5px;
-    }
-
-    .burger div {
-        width: 25px;
-        height: 3px;
-        background-color: #333; /* Use dark color for better contrast on white navbar */
-    }
-
-    /* SECTION BASE */
-    .section {
-        padding: 100px 60px;
-    }
-
-    /* ===== HOME SECTION ===== */
-
-    .home {
-        padding-top: 140px;
-    }
-
-    .home-content {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 40px;
-    }
-
-    .text-content {
-        max-width: 550px;
-    }
-
-    h1 {
-        font-size: 42px;
-        font-weight: 700;
-    }
-
-    .highlight {
-        color: #007bff;
-    }
-
-    .subtitle {
-        margin-top: 5px;
-        font-size: 18px;
-        opacity: 0.7;
-    }
-
-    .description {
-        margin-top: 15px;
-        font-size: 16px;
-    }
-
-    .home-btn {
-        display: inline-block;
-        margin-top: 25px;
-        padding: 12px 25px;
-        background: #007bff;
-        color: white;
-        text-decoration: none;
-        border-radius: 6px;
-        font-weight: 600;
-        transition: 0.3s;
-    }
-
-    .home-btn:hover {
-        background: #005fcc;
-    }
-
-    /* PROFILE IMAGE */
-    .image-content {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .profile-img {
-        width: 260px;
-        height: 260px;
-        border-radius: 50%;
-        object-fit: cover;
-        border: 6px solid #eaeaea;
-        box-shadow: 0px 6px 18px rgba(0,0,0,0.1);
-    }
-
-    /* ABOUT */
-    #about h2 {
-        font-size: 32px;
-        margin-bottom: 20px;
-    }
-
-    /* SKILLS STYLES - Merged from both original CSS blocks */
-    .skills-container {
-        margin-top: 20px;
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
-    }
-    .skill span {
-        font-weight: 600;
-    }
-    .skill-bar {
-        background-color: #e0e0e0; /* from inline style */
-        height: 10px; /* from inline style */
-        border-radius: 10px;
-        overflow: hidden;
-        margin-top: 5px; /* from inline style */
-    }
-    .skill-level {
-        height: 100%;
-        background: linear-gradient(90deg, #007bff, #00d2ff); /* Updated from original gradient to match portfolio theme */
-        border-radius: 10px;
-    }
-
-
-    /* PROJECTS */
-    .projects-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-        gap: 25px;
-    }
-
-    .project-card {
-        background: white;
-        padding: 20px;
-        border-radius: 12px;
-        box-shadow: 0 4px 14px rgba(0,0,0,0.07);
-        text-align: center;
-    }
-
-    .project-card img {
-        width: 100%;
-        height: 170px;
-        border-radius: 10px;
-        object-fit: cover;
-    }
-
-    /* NOTES (ACCORDION) */
-    .accordion {
-        margin-top: 15px;
-    }
-
-    .accordion-btn {
-        width: 100%;
-        padding: 14px;
-        background: #007bff;
-        color: white;
-        font-size: 16px;
-        border: none;
-        text-align: left;
-        border-radius: 6px;
-        cursor: pointer;
-        transition: background 0.3s ease;
-    }
-
-    .accordion-btn:hover {
-        background: #005fcc;
-    }
-
-    .accordion-btn.active {
-        background: #005fcc;
-    }
-
-    .accordion-content {
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.35s ease, padding 0.35s ease;
-        background: #fff;
-        border-radius: 0 0 6px 6px;
-        box-shadow: 0 6px 14px rgba(0,0,0,0.05);
-        padding: 0 15px; /* collapsed padding */
-    }
-
-
-    .accordion-btn.active + .accordion-content {
-        padding: 15px 15px 30px 15px; /* padding when expanded */
-    }
-
-    /* CONTACT */
-    .contact .container {
-        text-align: center;
-    }
-
-    /* RESPONSIVE STYLES */
-    @media screen and (max-width: 768px) {
-        /* Mobile Navbar */
-        .navbar {
-            padding: 15px 20px;
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dan Ysrael Aguila · Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet" />
+    <style>
+        /* ─── RESET & BASE ─── */
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        .nav-links {
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f8fafc;
+            color: #0b1a2e;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ─── UTILITY ─── */
+        .section-label {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #3b82f6;
+            background: rgba(59, 130, 246, 0.10);
+            padding: 4px 14px;
+            border-radius: 100px;
+            margin-bottom: 12px;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            color: #0b1a2e;
+            margin-bottom: 8px;
+        }
+
+        .section-sub {
+            font-size: 1.05rem;
+            color: #4b5a6e;
+            max-width: 560px;
+            margin-bottom: 40px;
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ─── HERO ─── */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(145deg, #f0f5ff 0%, #ffffff 100%);
+            position: relative;
+            overflow: hidden;
+            padding: 80px 0 60px;
+        }
+
+        .hero::before {
+            content: '';
             position: absolute;
-            top: 60px; /* Adjust based on navbar height */
-            right: 0;
-            background-color: #333;
-            flex-direction: column;
-            width: 200px;
-            display: none;
-            padding: 10px 0;
-            border-radius: 0 0 5px 5px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            top: -40%;
+            right: -20%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.07) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
         }
 
-        .nav-links li a {
-             color: white; /* Links should be white on dark background */
-             padding: 10px 20px;
-             display: block;
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -15%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.06) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
         }
 
-        .nav-links li a:hover {
-            background-color: #007bff;
+        .hero .container {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
         }
 
-        .nav-links.active {
+        .hero-content h1 {
+            font-size: 3.8rem;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+            color: #0b1a2e;
+            margin-bottom: 6px;
+        }
+
+        .hero-content h1 .highlight {
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-content .tagline {
+            font-size: 1.2rem;
+            color: #4b5a6e;
+            margin-bottom: 24px;
+            font-weight: 400;
+        }
+
+        .hero-content .tagline strong {
+            color: #0b1a2e;
+            font-weight: 600;
+        }
+
+        .hero-cta {
             display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
         }
 
-        .burger {
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 28px;
+            border-radius: 100px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.25s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: #0b1a2e;
+            color: #fff;
+            box-shadow: 0 4px 14px rgba(11, 26, 46, 0.15);
+        }
+
+        .btn-primary:hover {
+            background: #1f2f45;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(11, 26, 46, 0.20);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: #0b1a2e;
+            border: 2px solid #d0d8e3;
+        }
+
+        .btn-outline:hover {
+            border-color: #3b82f6;
+            color: #3b82f6;
+            transform: translateY(-2px);
+        }
+
+        .hero-visual {
             display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
-        .burger div {
-             background-color: #333; /* Dark color for burger on white navbar */
+        .hero-avatar {
+            width: 320px;
+            height: 320px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 6rem;
+            font-weight: 700;
+            color: #fff;
+            box-shadow: 0 30px 60px rgba(59, 130, 246, 0.25);
+            transition: transform 0.4s ease;
+            user-select: none;
         }
 
-        /* General Mobile */
-        .section {
-            padding: 60px 20px;
+        .hero-avatar:hover {
+            transform: scale(1.02);
         }
 
-        .home-content {
-            flex-direction: column-reverse;
-            text-align: center;
-        }
-        .profile-img {
-            width: 200px;
-            height: 200px;
+        /* ─── STATUS BADGE ─── */
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #e6f0ff;
+            color: #1e4b8a;
+            padding: 6px 16px 6px 10px;
+            border-radius: 100px;
+            font-size: 0.8rem;
+            font-weight: 600;
             margin-bottom: 20px;
         }
 
-        h1 {
-            font-size: 32px;
+        .status-badge .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #3b82f6;
+            animation: pulse-dot 1.8s ease-in-out infinite;
         }
-    }
-    
-    @media (max-width: 900px) and (min-width: 769px) {
-        .home-content {
-            flex-direction: column-reverse;
+
+        @keyframes pulse-dot {
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.4;
+                transform: scale(1.3);
+            }
+        }
+
+        /* ─── ABOUT / PROFILE ─── */
+        .profile-section {
+            padding: 80px 0;
+            background: #fff;
+        }
+
+        .profile-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: start;
+        }
+
+        .profile-text p {
+            font-size: 1.05rem;
+            color: #1f2f45;
+            margin-bottom: 20px;
+        }
+
+        .profile-text p:last-child {
+            margin-bottom: 0;
+        }
+
+        .profile-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .stat-card {
+            background: #f8fafc;
+            padding: 24px 20px;
+            border-radius: 20px;
+            text-align: center;
+            border: 1px solid #edf2f7;
+            transition: all 0.25s ease;
+        }
+
+        .stat-card:hover {
+            border-color: #3b82f6;
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(59, 130, 246, 0.08);
+        }
+
+        .stat-card .number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #0b1a2e;
+            display: block;
+        }
+
+        .stat-card .label {
+            font-size: 0.85rem;
+            color: #6b7a8e;
+            font-weight: 500;
+        }
+
+        /* ─── EDUCATION ─── */
+        .education-section {
+            padding: 80px 0;
+            background: #f8fafc;
+        }
+
+        .timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .timeline-item {
+            background: #fff;
+            padding: 28px 32px;
+            border-radius: 20px;
+            border-left: 5px solid #3b82f6;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+            transition: all 0.25s ease;
+        }
+
+        .timeline-item:hover {
+            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.07);
+            transform: translateX(4px);
+        }
+
+        .timeline-item .meta {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 12px 20px;
+            margin-bottom: 4px;
+        }
+
+        .timeline-item .meta .school {
+            font-weight: 700;
+            font-size: 1.15rem;
+            color: #0b1a2e;
+        }
+
+        .timeline-item .meta .year {
+            font-size: 0.85rem;
+            color: #6b7a8e;
+            background: #f1f4f9;
+            padding: 2px 14px;
+            border-radius: 100px;
+            font-weight: 500;
+        }
+
+        .timeline-item .meta .location {
+            font-size: 0.85rem;
+            color: #6b7a8e;
+        }
+
+        .timeline-item .degree {
+            font-size: 0.95rem;
+            color: #4b5a6e;
+            margin-top: 2px;
+        }
+
+        /* ─── SKILLS ─── */
+        .skills-section {
+            padding: 80px 0;
+            background: #fff;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 24px;
+        }
+
+        .skill-category {
+            background: #f8fafc;
+            padding: 24px 22px;
+            border-radius: 20px;
+            border: 1px solid #edf2f7;
+            transition: all 0.25s ease;
+        }
+
+        .skill-category:hover {
+            border-color: #3b82f6;
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(59, 130, 246, 0.06);
+        }
+
+        .skill-category h3 {
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #3b82f6;
+            margin-bottom: 12px;
+        }
+
+        .skill-category .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .skill-category .tags span {
+            background: #fff;
+            padding: 4px 14px;
+            border-radius: 100px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: #1f2f45;
+            border: 1px solid #e2e8f0;
+        }
+
+        /* ─── PROJECTS ─── */
+        .projects-section {
+            padding: 80px 0;
+            background: #f8fafc;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+        }
+
+        .project-card {
+            background: #fff;
+            border-radius: 24px;
+            padding: 32px 30px;
+            box-shadow: 0 2px 16px rgba(0, 0, 0, 0.04);
+            border: 1px solid #edf2f7;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .project-card:hover::after {
+            opacity: 1;
+        }
+
+        .project-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
+            border-color: #d0d8e3;
+        }
+
+        .project-card .project-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #0b1a2e;
+            margin-bottom: 4px;
+        }
+
+        .project-card .project-sub {
+            font-size: 0.85rem;
+            color: #6b7a8e;
+            font-weight: 500;
+            margin-bottom: 14px;
+        }
+
+        .project-card .project-desc {
+            font-size: 0.95rem;
+            color: #1f2f45;
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+
+        .project-card .project-desc ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .project-card .project-desc ul li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 6px;
+        }
+
+        .project-card .project-desc ul li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: #3b82f6;
+            font-weight: 700;
+        }
+
+        .project-card .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 4px;
+        }
+
+        .project-card .tech-stack span {
+            background: #f1f4f9;
+            padding: 4px 14px;
+            border-radius: 100px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: #1f2f45;
+            letter-spacing: 0.02em;
+        }
+
+        /* ─── FOOTER ─── */
+        .footer {
+            padding: 40px 0 32px;
+            background: #0b1a2e;
+            color: #a0b3cc;
             text-align: center;
         }
-        .profile-img {
-            width: 200px;
-            height: 200px;
+
+        .footer a {
+            color: #8bb3ff;
+            font-weight: 500;
+            transition: color 0.2s;
         }
-    }
-  </style>
-  
+
+        .footer a:hover {
+            color: #fff;
+        }
+
+        .footer .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 28px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+
+        .footer .footer-links a {
+            font-size: 0.9rem;
+            color: #c8d6e8;
+        }
+
+        .footer .footer-links a:hover {
+            color: #fff;
+        }
+
+        .footer p {
+            font-size: 0.85rem;
+            color: #6b8aa8;
+        }
+
+        /* ─── RESPONSIVE ─── */
+        @media (max-width: 992px) {
+            .hero .container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-content h1 {
+                font-size: 2.8rem;
+            }
+
+            .hero-cta {
+                justify-content: center;
+            }
+
+            .hero-visual {
+                order: -1;
+            }
+
+            .hero-avatar {
+                width: 200px;
+                height: 200px;
+                font-size: 4rem;
+            }
+
+            .profile-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .hero-content h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero-avatar {
+                width: 160px;
+                height: 160px;
+                font-size: 3.2rem;
+            }
+
+            .profile-stats {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .stat-card .number {
+                font-size: 1.6rem;
+            }
+
+            .timeline-item {
+                padding: 20px;
+            }
+
+            .project-card {
+                padding: 24px 20px;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .btn {
+                padding: 10px 20px;
+                font-size: 0.85rem;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ─── SCROLL REVEAL (JS triggers) ─── */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* small tweaks */
+        .glow-text {
+            color: #3b82f6;
+        }
+
+        .inline-code {
+            background: #edf2f7;
+            padding: 1px 8px;
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 0.85em;
+            color: #1f2f45;
+        }
+    </style>
 </head>
 <body>
 
-  <nav class="navbar">
-  <div class="nav-logo">Dan Ysrael Aguila</div>
-  <ul class="nav-links">
-    <li><a href="#home">Home</a></li>
-    <li><a href="#about">About</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#notes">Notes</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-  <div class="burger">
-    <div></div>
-    <div></div>
-    <div></div>
-  </div>
-</nav>
-
-  <section id="home" class="section home">
-  <div class="home-content">
-    
-    <div class="text-content">
-      <h1>Hello, I'm <span class="highlight">Dan Ysrael Aguila</span></h1>
-      <p class="subtitle">BSIT Student • Aspiring Cybersecurity & IT Professional</p>
-      <p class="description">
-        Passionate about technology, security, and creating efficient, modern software solutions.
-      </p>
-      <a href="#projects" class="home-btn">View My Projects</a>
-    </div>
-
-    <div class="image-content">
-      
-      <img src="images/profile.jpg" alt="Profile Photo" class="profile-img">
-    </div>
-
-  </div>
-</section>
-  
-
-
-  <section id="about" class="section about">
-  <div class="container">
-    <h2>About Me</h2>
-    <p>Hello! I'm Dan Ysrael Aguila, a BSIT student passionate about Information Technology, Cybersecurity, and Web Development. I enjoy learning new technologies and applying them to real-world projects.</p>
-
-    <h3>Skills</h3>
-    <div class="skills-container">
-      <div class="skill">
-        <span>HTML & CSS</span>
-        <div class="skill-bar"><div class="skill-level" style="width: 90%;"></div></div>
-      </div>
-      <div class="skill">
-        <span>Java / JavaFX / Swing</span>
-        <div class="skill-bar"><div class="skill-level" style="width: 85%;"></div></div>
-      </div>
-      <div class="skill">
-        <span>Python / PyQt5</span>
-        <div class="skill-bar"><div class="skill-level" style="width: 80%;"></div></div>
-      </div>
-      <div class="skill">
-        <span>SQL / Database Management</span>
-        <div class="skill-bar"><div class="skill-level" style="width: 75%;"></div></div>
-      </div>
-      <div class="skill">
-        <span>Cybersecurity & Network Analysis</span>
-        <div class="skill-bar"><div class="skill-level" style="width: 70%;"></div></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-  <section id="projects" class="section projects">
-    <div class="container">
-      <h2>Projects</h2>
-      <div class="projects-grid">
-        <div class="project-card">
-          
-
-[Image of a SMS messaging application user interface]
-
-          <img src="images/project1.png" alt="Project 1">
-          <h3>SMS Messaging App</h3>
-<p>PyQt5-based messaging tool for sending SMS using API integration.</p>
-
+    <!-- ─── HERO ─── -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <div class="status-badge">
+                    <span class="dot"></span>
+                    Open for Internship
+                </div>
+                <h1>
+                    Hi, I'm <br />
+                    <span class="highlight">Dan Ysrael Aguila</span>
+                </h1>
+                <p class="tagline">
+                    <strong>IT Student</strong> · Windows Admin · React Native Developer
+                </p>
+                <div class="hero-cta">
+                    <a href="#projects" class="btn btn-primary">View My Work</a>
+                    <a href="#profile" class="btn btn-outline">About Me</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="hero-avatar">DA</div>
+            </div>
         </div>
-        <div class="project-card">
-          
-          <img src="images/project2.png" alt="Project 2">
-          <h3>React Supabase App</h3>
-          <p>Product & price management system with authentication.</p>
+    </section>
+
+    <!-- ─── PROFILE ─── -->
+    <section class="profile-section" id="profile">
+        <div class="container">
+            <div class="profile-grid">
+                <div class="profile-text fade-in">
+                    <span class="section-label">About</span>
+                    <h2 class="section-title">IT Support &amp; Development</h2>
+                    <p>
+                        Information Technology student seeking an <strong>IT Support</strong> or
+                        <strong>IT Specialist Internship</strong>. Skilled in Windows administration,
+                        hardware and software troubleshooting, networking, and system maintenance.
+                    </p>
+                    <p>
+                        Experienced in developing applications using <strong>React Native</strong> and
+                        <strong>Firebase</strong> through academic team projects. Eager to apply technical
+                        skills while growing in a professional IT environment.
+                    </p>
+                </div>
+                <div class="profile-stats fade-in">
+                    <div class="stat-card">
+                        <span class="number">2+</span>
+                        <span class="label">Team Projects</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="number">6</span>
+                        <span class="label">Tech Stacks</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="number">2023</span>
+                        <span class="label">Started IT Degree</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="number">2021</span>
+                        <span class="label">ICT Diploma</span>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <section id="notes" class="section notes">
-    <div class="container">
-      <h2>Notes</h2>
+    <!-- ─── EDUCATION ─── -->
+    <section class="education-section" id="education">
+        <div class="container">
+            <span class="section-label fade-in">Education</span>
+            <h2 class="section-title fade-in">Where I've Learned</h2>
+            <p class="section-sub fade-in">Building a strong foundation in IT and software development.</p>
 
-      <div class="accordion">
-        <button class="accordion-btn">Lesson 1: IT Security & CIA Triad</button>
-        <div class="accordion-content">
-          <p><strong>What is IT Security?</strong> Information assurance is the practice of ensuring and managing risks related to the use, processing, storage, and transmission of information or data.</p>
-          <h3>Confidentiality</h3>
-          <p>Information must only be available to authorized parties. Examples: Messages, personal data, healthcare records, intellectual property.</p>
-          <p>Access Control Methods: Passwords, Two-factor authentication (2FA), Data encryption.</p>
-          <h3>Integrity</h3>
-          <p>Information must remain consistent, trustworthy, and accurate. Examples: Bank transactions, document editing, online reviews, database management.</p>
-          <p>Access Control Methods: Data validation, Version control systems, Hashing/Checksums.</p>
-          <h3>Availability</h3>
-          <p>Information must remain accessible to authorized parties even during failures. Examples: Healthcare systems, online shopping websites, cloud services.</p>
-          <p>Access Control Methods: DDoS Protection, Backups, Load balancer.</p>
-          
+            <div class="timeline">
+                <div class="timeline-item fade-in">
+                    <div class="meta">
+                        <span class="school">New Era University</span>
+                        <span class="year">2023 – Present</span>
+                        <span class="location">Quezon City</span>
+                    </div>
+                    <div class="degree">Bachelor of Science – Information Technology</div>
+                </div>
+
+                <div class="timeline-item fade-in">
+                    <div class="meta">
+                        <span class="school">Asian Institute of Computer Studies</span>
+                        <span class="year">2021 – 2023</span>
+                        <span class="location">Montalban Rizal</span>
+                    </div>
+                    <div class="degree">ICT – Information Communications Technology</div>
+                </div>
+            </div>
         </div>
-      </div>
+    </section>
 
-      <div class="accordion">
-        <button class="accordion-btn">Lesson 1B: Cybersecurity</button>
-        <div class="accordion-content">
-          <p><strong>What is Cybersecurity?</strong> The practice of protecting computer systems, networks, and sensitive data from theft, damage, or unauthorized access.</p>
-          <h3>Three Pillars</h3>
-          <p>People, Processes, Technology.</p>
-          <h3>SOC Roles</h3>
-          <p>Tier 1: Alert Analyst, Tier 2: Incident Responder, Tier 3: SME/Hunter, SOC Manager.</p>
-          <h3>Red Team vs Blue Team</h3>
-          <p>Red Team (Offense) vs Blue Team (Defense) to improve security posture.</p>
-          <h3>Penetration Testing</h3>
-          <ol>
-            <li>Recon: Discovering target</li>
-            <li>Enumeration/Scanning: Probing defenses</li>
-            <li>Gaining Access: Exploiting vulnerabilities</li>
-            <li>Maintaining Access: Creating foothold</li>
-            <li>Covering Tracks: Erasing footprints</li>
-            <li>Reporting: Documenting findings</li>
-          </ol>
-          
+    <!-- ─── SKILLS ─── -->
+    <section class="skills-section" id="skills">
+        <div class="container">
+            <span class="section-label fade-in">Skills</span>
+            <h2 class="section-title fade-in">Tech Toolbox</h2>
+            <p class="section-sub fade-in">Languages, frameworks, and tools I work with.</p>
+
+            <div class="skills-grid">
+                <div class="skill-category fade-in">
+                    <h3>Programming Languages</h3>
+                    <div class="tags">
+                        <span>JavaScript</span>
+                        <span>TypeScript</span>
+                        <span>Python</span>
+                        <span>SQL</span>
+                        <span>HTML</span>
+                        <span>CSS</span>
+                    </div>
+                </div>
+
+                <div class="skill-category fade-in">
+                    <h3>Mobile &amp; Backend</h3>
+                    <div class="tags">
+                        <span>React Native</span>
+                        <span>Expo</span>
+                        <span>Firebase Auth</span>
+                        <span>Firestore</span>
+                        <span>Firebase Security</span>
+                    </div>
+                </div>
+
+                <div class="skill-category fade-in">
+                    <h3>IT Support &amp; Networking</h3>
+                    <div class="tags">
+                        <span>Windows 10/11</span>
+                        <span>System Maintenance</span>
+                        <span>Hardware Troubleshooting</span>
+                        <span>Software Config</span>
+                        <span>TCP/IP</span>
+                        <span>DNS / DHCP</span>
+                        <span>LAN</span>
+                    </div>
+                </div>
+
+                <div class="skill-category fade-in">
+                    <h3>Tools &amp; Workflow</h3>
+                    <div class="tags">
+                        <span>Git</span>
+                        <span>GitHub</span>
+                        <span>Firebase Console</span>
+                        <span>Expo CLI</span>
+                        <span>MS Office Suite</span>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
+    </section>
 
-      <div class="accordion">
-        <button class="accordion-btn">Lesson 2A: Cryptography</button>
-        <div class="accordion-content">
-          <h3>Encryption</h3>
-          <p>Converts plain text data into unreadable format using a key.</p>
-          <h3>Authentication</h3>
-          <p>Verifying identity of user or system.</p>
-          <h3>Integrity</h3>
-          <p>Ensuring data is not modified during transmission or storage.</p>
-          <h3>Non-repudiation</h3>
-          <p>Guaranteeing sender cannot deny sending a message.</p>
-          <h3>Hash Functions</h3>
-          <p>Creates unique fixed-length output for data integrity verification.</p>
-          <h3>Ciphers</h3>
-          <p>Symmetric (AES, DES) & Asymmetric (RSA, ECDSA) encryption.</p>
-          <h3>Key Exchange</h3>
-          <p>Diffie-Hellman protocol for shared secret key.</p>
-          <h3>Internet Encryption</h3>
-          <p>End-to-end & Transport encryption.</p>
-          <h3>Certificates</h3>
-          <p>X.509 certificates validate authenticity and integrity.</p>
+    <!-- ─── PROJECTS ─── -->
+    <section class="projects-section" id="projects">
+        <div class="container">
+            <span class="section-label fade-in">Projects</span>
+            <h2 class="section-title fade-in">Things I've Built</h2>
+            <p class="section-sub fade-in">Team-based applications using React Native and Firebase.</p>
+
+            <div class="projects-grid">
+
+                <!-- Cognilock -->
+                <div class="project-card fade-in">
+                    <div class="project-title">Cognilock</div>
+                    <div class="project-sub">Parental Control Application · Team Project</div>
+                    <div class="project-desc">
+                        <ul>
+                            <li>Role-Based Access Control (RBAC) for administrative parental controls.</li>
+                            <li>System-level app permissions, visibility settings, and automated screen-time lockouts.</li>
+                            <li>Offline data synchronization with Firebase caching.</li>
+                            <li>QR-code pairing for seamless child device provisioning.</li>
+                        </ul>
+                    </div>
+                    <div class="tech-stack">
+                        <span>React Native</span>
+                        <span>TypeScript</span>
+                        <span>Expo</span>
+                        <span>Firebase</span>
+                        <span>Groq AI</span>
+                    </div>
+                </div>
+
+                <!-- NEU Lost and Found -->
+                <div class="project-card fade-in">
+                    <div class="project-title">NEU Lost and Found</div>
+                    <div class="project-sub">Lost &amp; Found Application · Team Project</div>
+                    <div class="project-desc">
+                        <ul>
+                            <li>Domain-restricted authentication with official school email domains.</li>
+                            <li>User reporting, access revocation, and account banning workflows.</li>
+                            <li>Real-time database sync with local persistence for offline use.</li>
+                            <li>Source control and code collaboration via Git &amp; GitHub.</li>
+                        </ul>
+                    </div>
+                    <div class="tech-stack">
+                        <span>React Native</span>
+                        <span>TypeScript</span>
+                        <span>Expo</span>
+                        <span>Firebase</span>
+                    </div>
+                </div>
+
+            </div>
         </div>
-      </div>
+    </section>
 
-      <div class="accordion">
-        <button class="accordion-btn">Lesson 2C: Hypervisor & Cloud Security</button>
-        <div class="accordion-content">
-          <p>Type 1 (Bare-metal) and Type 2 (Hosted) hypervisors.</p>
-          <p>Cloud storage: OneDrive, File Sync, CDN.</p>
-          <h3>Cloud Models</h3>
-          <ul>
-            <li>Public Cloud</li>
-            <li>Private Cloud</li>
-            <li>Hybrid Cloud</li>
-            <li>Community Cloud</li>
-          </ul>
-          <h3>CASB</h3>
-          <p>Ensures secure device access to resources, single sign-on, malware scanning, and monitoring.</p>
-          
+    <!-- ─── FOOTER ─── -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-links">
+                <a href="#home">Home</a>
+                <a href="#profile">About</a>
+                <a href="#education">Education</a>
+                <a href="#skills">Skills</a>
+                <a href="#projects">Projects</a>
+            </div>
+            <p>&copy; 2026 Dan Ysrael Aguila · Built with &hearts; using vanilla HTML &amp; CSS</p>
         </div>
-      </div>
+    </footer>
 
-      <div class="accordion">
-        <button class="accordion-btn">Lesson 2D: Web Security</button>
-        <div class="accordion-content">
-          <p>Protecting websites, apps, and services from unauthorized access or attacks.</p>
-          <h3>Examples</h3>
-          <p>Confidentiality: encrypted online banking</p>
-          <p>Integrity: digital signatures for transactions</p>
-          <p>Availability: redundant servers, DoS protection</p>
-          <h3>OWASP Top 10</h3>
-          <p>Security checklist for web application risks.</p>
-          <p>Case Study: Blackcat ransomware attack on Change Healthcare.</p>
-        </div>
-      </div>
+    <!-- ─── SCROLL REVEAL SCRIPT ─── -->
+    <script>
+        (function() {
+            const els = document.querySelectorAll('.fade-in');
 
-      <div class="accordion">
-        <button class="accordion-btn">Lesson 3: OS Command Injection</button>
-        <div class="accordion-content">
-          <p>Attack exploiting unsafe user input to execute arbitrary OS commands.</p>
-          <h3>Variants</h3>
-          <p>Argument Injection & Command Injection.</p>
-          <h3>Mitigation</h3>
-          <p>Output encoding, escaping, parameterization, input validation, principle of least privilege.</p>
-        </div>
-      </div>
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.15,
+                rootMargin: '0px 0px -30px 0px'
+            });
 
-      <div class="accordion">
-        <button class="accordion-btn">Lesson 4: SQL & SQL Injection</button>
-        <div class="accordion-content">
-          <p>SQL is used to interact with relational databases.</p>
-          <p>SQL Injection occurs when inputs alter query logic.</p>
-          <h3>Impact</h3>
-          <p>Data breach, corruption, DoS, system compromise.</p>
-          <h3>Mitigation</h3>
-          <p>Prepared statements, input validation, stored procedures, least privilege.</p>
-        </div>
-      </div>
+            els.forEach(el => observer.observe(el));
 
-      <div class="accordion">
-        <button class="accordion-btn">Lesson 5: Cross-Site Scripting (XSS)</button>
-        <div class="accordion-content">
-          <p>Improper input neutralization in web pages allowing attacker scripts.</p>
-          <h3>Impact</h3>
-          <p>Cookie theft, session hijacking, injecting malicious content, keylogging.</p>
-        </div>
-      </div>
+            // trigger visible for any already in view on load
+            setTimeout(() => {
+                els.forEach(el => {
+                    const rect = el.getBoundingClientRect();
+                    if (rect.top < window.innerHeight - 60) {
+                        el.classList.add('visible');
+                    }
+                });
+            }, 200);
+        })();
+    </script>
 
-      <div class="accordion">
-        <button class="accordion-btn">Lesson 6: Path Traversal</button>
-        <div class="accordion-content">
-          <p>Allows attackers to access files outside intended directories.</p>
-          <h3>Mitigation</h3>
-          <p>Canonicalization, input validation, sanitization, safe APIs, testing tools.</p>
-        </div>
-      </div>
-
-        <div class="accordion">
-        <button class="accordion-btn">Lesson 7: Network Traffic Analysis</button>
-        <div class="accordion-content">
-          <h3>Network Traffic Analysis</h3>
-          <p>Capturing, inspecting, and analyzing network data flow. Characterizes common ports and protocols, establishes network baselines, monitors threats.</p>
-          <h4>OSI Model Primer</h4>
-          <ul>
-            <li>Layer 7 - **Application**: User interface (HTTP, FTP)</li>
-            <li>Layer 6 - **Presentation**: Data formatting (SSL, TLS)</li>
-            <li>Layer 5 - **Session**: Manages connections</li>
-            <li>Layer 4 - **Transport**: End-to-end connections (TCP, UDP)</li>
-            <li>Layer 3 - **Network**: Addressing and routing (IP)</li>
-            <li>Layer 2 - **Data Link**: Frames between devices (Ethernet)</li>
-            <li>Layer 1 - **Physical**: Raw bit transmission (Cables, WiFi) *Note: Layer 1 was missing in the original list*</li>
-          </ul>
-          <h4>Analysis Process</h4>
-          <ul>
-            <li>Ingest Traffic, Reduce Noise, Analyze, Detect & Alert</li>
-          </ul>
-          <h4>Traffic Analysis Tools</h4>
-          <ul>
-            <li>tcpdump, Tshark, **Wireshark**, NGrep, tcpick</li>
-            <li>Network Taps, Span Ports</li>
-          </ul>
-          <h4>Wireshark Deep Dive</h4>
-          <ul>
-            <li>Packet List (Orange), Packet Details (Blue), Packet Bytes (Green)</li>
-            <li>Capture & Display Filters: host, net, port, protocol</li>
-            <li>Statistics & TCP Stream Following for deeper analysis</li>
-          </ul>
-          
-
-[Image of the OSI Model with all 7 layers]
-
-        </div>
-      </div>
-
-      <div class="accordion">
-        <button class="accordion-btn">Lesson 8: Email Security Fundamentals</button>
-        <div class="accordion-content">
-          <h3>Email Security Principles (CIA-AN)</h3>
-          <ul>
-            <li>**Confidentiality**: Only authorized users can access emails</li>
-            <li>**Integrity**: Protects emails from unauthorized modification</li>
-            <li>**Availability**: Emails accessible when needed</li>
-            <li>**Authentication**: Verifies sender identity</li>
-            <li>**Non-repudiation**: Prevents sender from denying sending</li>
-          </ul>
-          <h4>Email Transmission Process</h4>
-          <ol>
-            <li>Compose Email (Email Client)</li>
-            <li>SMTP Server (Post Office)</li>
-            <li>DNS Server Lookup (MX Records)</li>
-            <li>Destination MX Server</li>
-            <li>Recipient’s Mailbox</li>
-          </ol>
-          <h4>Encryption & Signatures</h4>
-          <ul>
-            <li>Email Encryption: Scrambles content for confidentiality</li>
-            <li>Digital Signatures: Verify sender identity and integrity</li>
-            <li>Standards: S/MIME (enterprise) vs OpenPGP (privacy-focused)</li>
-          </ul>
-          <h4>Common Threats & Tools</h4>
-          <ul>
-            <li>Phishing, Malware, Email Spoofing, Business Email Compromise, Social Engineering</li>
-            <li>SPF, DKIM, DMARC, Message Header Analyzer, REMnux platform</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="accordion">
-        <button class="accordion-btn">Lesson 9: Introduction to Event Logs</button>
-        <div class="accordion-content">
-          <h3>Endpoint Security & Logs</h3>
-          <p>Monitoring workstations and analyzing event logs is crucial to detect attacks and unauthorized activity.</p>
-          <h4>Importance of Logs</h4>
-          <ul>
-            <li>Provide historical records to identify malicious activity</li>
-            <li>Every action leaves a digital footprint</li>
-          </ul>
-          <h4>Essential Log Entry Information</h4>
-          <ul>
-            <li>Timestamp, Source, Type, Details (user, IP, device, etc.)</li>
-          </ul>
-          <h4>Contextual Correlation</h4>
-          <p>Aggregating logs and analyzing them provides a complete attack chain overview.</p>
-          <h4>Common Log Types</h4>
-          <ul>
-            <li>Security, System, Application, Network, Web Server, Audit</li>
-          </ul>
-          <h4>Windows Log Characteristics</h4>
-          <ul>
-            <li>File types: .evt, .evtx, readable via XML</li>
-            <li>Categories: System, Security, Application</li>
-            <li>Entry Elements: Level, Date/Time, Source, Event ID, Task Category, Details XML</li>
-            <li>Tools: Event Viewer, Wevtutil.exe, Get-WinEvent (PowerShell)</li>
-          </ul>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-
-  <section id="contact" class="section contact">
-    <div class="container">
-      <h2>Contact Me</h2>
-      <p>Email: danysrael720@gmail.com</p>
-      <p>Phone: +63 946 572 0261</p>
-    </div>
-  </section>
-
-  <script>
-    const burger = document.querySelector('.burger');
-    const navLinks = document.querySelector('.nav-links');
-    const acc = document.querySelectorAll(".accordion-btn");
-
-    // Navbar Toggle Logic
-    burger.addEventListener('click', () => {
-        navLinks.classList.toggle('active');
-    });
-
-    // Accordion Logic
-    acc.forEach(button => {
-        button.addEventListener("click", () => {
-            const content = button.nextElementSibling;
-
-            // Toggle active class
-            button.classList.toggle("active");
-
-            // If already open, close it
-            if (content.style.maxHeight) {
-                content.style.maxHeight = null;
-                content.style.paddingBottom = null;
-                // Revert to collapsed padding defined in CSS
-                content.style.padding = '0 15px'; 
-            } else {
-                // Set max-height to scrollHeight plus the total padding (15px top + 30px bottom)
-                content.style.maxHeight = content.scrollHeight + 45 + "px"; 
-                // Set the expanded padding defined in CSS
-                content.style.padding = '15px 15px 30px 15px'; 
-            }
-        });
-    });
-  </script>
 </body>
 </html>
